@@ -15,8 +15,8 @@ class SiriProxy::Plugin::MockMe < SiriProxy::Plugin
 	response = ask "I will now mock you." #if they say that then siri will confirm the mocking and notify the user and then ask for input
 	until response =~ /stop mocking me/i do #until the response is "siri proxy stop mocking me" she will still mock you
 		mock = response		#puts the response into a tmp var to hold the text
-		mock.gsub(/I'm/im, "You're") #Replaces Im with you're for example "Im dumb" siri being witty will respond "Your dumb"
-		mock.gsub(/my/im, "your") #another type of replacement thingy
+		mock.gsub!(/I'm/im, "You're") #Replaces Im with you're for example "Im dumb" siri being witty will respond "Your dumb"
+		mock.gsub!(/my/im, "your") #another type of replacement thingy
 		response = ask "#{mock}" #siri says mock which is response and then asks for input
 	end #ends the loop from line 11 to 14
 	say "I will stop mocking you now, LOL!" #tells the user she is done mocking
@@ -24,4 +24,7 @@ class SiriProxy::Plugin::MockMe < SiriProxy::Plugin
   end
  end
  
+ #things to note:
+ #/im makes it ignore the case
+ #gsub subtitues stuff!
  #https://github.com/Ponyboy47/siriproxy-cleverbot go there and packadge the file like a usual addon!
